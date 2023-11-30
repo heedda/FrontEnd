@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { ThemeProvider } from "styled-components";
-import Button from "./components/Button";
+import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import Button from './components/Button';
 
 const AppBlock = styled.div`
   width: 512px;
@@ -21,10 +21,10 @@ function App() {
     <ThemeProvider
       theme={{
         palette: {
-          blue: "#228be6",
-          gray: "#495057",
-          pink: "#f06595",
-        },
+          blue: '#228be6',
+          gray: '#495057',
+          pink: '#f06595'
+        }
       }}
     >
       <AppBlock>
@@ -59,6 +59,17 @@ function App() {
             BUTTON
           </Button>
           <Button color="pink" size="small" outline>
+            BUTTON
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button size="large" fullWidth>
+            BUTTON
+          </Button>
+          <Button size="large" color="gray" fullWidth>
+            BUTTON
+          </Button>
+          <Button size="large" color="pink" fullWidth>
             BUTTON
           </Button>
         </ButtonGroup>
