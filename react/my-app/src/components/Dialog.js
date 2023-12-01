@@ -1,29 +1,47 @@
-import React, { useEffect } from "react";
-import { keyframes, styled } from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { keyframes, css } from "styled-components";
 import Button from "./Button";
 
 const fadeIn = keyframes`
-  from{
+  from {
     opacity: 0
   }
-  to{
+  to {
     opacity: 1
   }
 `;
 
-const sideUp = keyframes`
-  from{
+const fadeOut = keyframes`
+  from {
+    opacity: 1
+  }
+  to {
+    opacity: 0
+  }
+`;
+
+const slideUp = keyframes`
+  from {
     transform: translateY(200px);
   }
-  to{
+  to {
     transform: translateY(0px);
+  }
+`;
+
+const slideDown = keyframes`
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(200px);
   }
 `;
 
 const DarkBackground = styled.div`
   position: fixed;
-  top: 0px;
-  left: 0px;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   display: flex;
@@ -35,9 +53,15 @@ const DarkBackground = styled.div`
   animation-timing-function: ease-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
+
+  ${(props) =>
+    props.disappear &&
+    css`
+      animation-name: ${fadeOut};
+    `}
 `;
 
-const DialogBolock = styled.div`
+const DialogBlock = styled.div`
   width: 320px;
   padding: 1.5rem;
   background: white;
@@ -52,8 +76,14 @@ const DialogBolock = styled.div`
 
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
-  animation-name: ${sideUp};
+  animation-name: ${slideUp};
   animation-fill-mode: forwards;
+
+  ${(props) =>
+    props.disappear &&
+    css`
+      animation-name: ${slideDown};
+    `}
 `;
 
 const ButtonGroup = styled.div`
@@ -77,21 +107,33 @@ function Dialog({
   onCancel,
   visible,
 }) {
-  if (!visible) return null;
+  const [animate, setAnimate] = useState(false);
+  const [localVisible, setLocalVisible] = useState(visible);
+
+  useEffect(() => {
+    // visible 값이 true -> false 가 되는 것을 감지
+    if (localVisible && !visible) {
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 250);
+    }
+    setLocalVisible(visible);
+  }, [localVisible, visible]);
+
+  if (!animate && !localVisible) return null;
   return (
-    <DarkBackground>
-      <DialogBolock>
+    <DarkBackground disappear={!visible}>
+      <DialogBlock disappear={!visible}>
         <h3>{title}</h3>
         <p>{children}</p>
         <ButtonGroup>
-          <ShortMarginButton color="gray" onClick={onConfirm}>
-            {confirmText}
-          </ShortMarginButton>
-          <ShortMarginButton color="pink" onClick={onCancel}>
+          <ShortMarginButton color="gray" onClick={onCancel}>
             {cancelText}
           </ShortMarginButton>
+          <ShortMarginButton color="pink" onClick={onConfirm}>
+            {confirmText}
+          </ShortMarginButton>
         </ButtonGroup>
-      </DialogBolock>
+      </DialogBlock>
     </DarkBackground>
   );
 }

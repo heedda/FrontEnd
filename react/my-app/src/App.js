@@ -30,6 +30,9 @@ function App() {
     console.log("취소");
     setDialog(false);
   };
+  const test = () => {
+    setTimeout(() => console.log("ghkr"), 5000);
+  };
   return (
     <ThemeProvider
       theme={{
