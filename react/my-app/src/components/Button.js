@@ -80,11 +80,10 @@ const StyledButton = styled.button`
   ${sizeStyles}
 
   ${colorStyles}
-
-    & + & {
+  
+  & + & {
     margin-left: 1rem;
   }
-
   ${fullWidthStyle}
 `;
 
