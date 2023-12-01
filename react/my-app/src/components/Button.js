@@ -74,16 +74,14 @@ const StyledButton = styled.button`
   cursor: pointer;
   padding-left: 1rem;
   padding-right: 1rem;
+  justify-content: center;
   align-items: center;
 
-  /* 크기 */
   ${sizeStyles}
 
-  /* 색상 */
   ${colorStyles}
 
-  /* 기타 */
-  & + & {
+    & + & {
     margin-left: 1rem;
   }
 
