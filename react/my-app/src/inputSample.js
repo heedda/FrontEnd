@@ -1,45 +1,52 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 
-const Test = () => {
-  const [input, setInput] = useState({
-    // 상태와 상태 관리 함수
+function InputSample() {
+  const [inputs, setInputs] = useState({
     name: "",
-    nickName: "",
+    nickname: "",
   });
-  const { name, nickName } = input; // 비구조화 할당 (디스트럭처링)
+  const nameInput = useRef();
 
-  const onchange = (e) => {
-    // e에는 뭐가 올까
-    console.log(e);
-    const { value, name } = e.target; // e,target에는 뭐가 들었을까
-    setInput({
-      ...input, // 스프레드 문법
-      [name]: value, // 객체의 키값으로 변수를 사용하는 방법
+  const { name, nickname } = inputs; // 비구조화 할당을 통해 값 추출
+
+  const onChange = (e) => {
+    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+    setInputs({
+      ...inputs, // 기존의 input 객체를 복사한 뒤
+      [name]: value, // name 키를 가진 값을 value 로 설정
     });
   };
-  const onclick = () => {
-    setInput({
+
+  const onReset = () => {
+    setInputs({
       name: "",
-      nickName: "",
+      nickname: "",
     });
+    nameInput.current.focus();
   };
+
   return (
     <div>
-      <input name="name" placeholder="이름" onChange={onchange} value={name} />
       <input
-        name="nickName"
-        placeholder="닉네임"
-        onChange={onchange}
-        value={nickName}
+        name="name"
+        placeholder="이름"
+        onChange={onChange}
+        value={name}
+        ref={nameInput}
       />
-      <button onClick={onclick}>초기화</button>
+      <input
+        name="nickname"
+        placeholder="닉네임"
+        onChange={onChange}
+        value={nickname}
+      />
+      <button onClick={onReset}>초기화</button>
       <div>
-        <b>값 : </b>
-        {name}({nickName})
+        <b>값: </b>
+        {name} ({nickname})
       </div>
     </div>
   );
-};
+}
 
-export default Test;
+export default InputSample;
