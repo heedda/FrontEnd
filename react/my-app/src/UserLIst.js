@@ -1,35 +1,14 @@
 import React from "react";
 
-const UserLIst = () => {
-  function User({ user }) {
-    return (
-      <div>
-        <b>{user.userName}</b> <span> : {user.email}</span>
-      </div>
-    );
-  }
-  const users = [
-    {
-      id: 1,
-      userName: "velopert",
-      email: "public.velopert@gmail.com",
-    },
-    {
-      id: 2,
-      userName: "tester",
-      email: "tester@example.com",
-    },
-    {
-      id: 3,
-      userName: "liz",
-      email: "liz@example.com",
-    },
-    {
-      id: 4,
-      userName: "heechan",
-      email: "heedda.kollim@gmail.com",
-    },
-  ];
+function User({ user }) {
+  return (
+    <div>
+      <b>{user.username}</b> <span>({user.email})</span>
+    </div>
+  );
+}
+
+function UserList({ users }) {
   return (
     <div>
       {users.map((user) => (
@@ -37,6 +16,6 @@ const UserLIst = () => {
       ))}
     </div>
   );
-};
+}
 
-export default UserLIst;
+export default UserList;

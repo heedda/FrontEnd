@@ -64,7 +64,6 @@ const fullWidthStyle = css`
 `;
 
 const StyledButton = styled.button`
-  /* 공통 스타일 */
   display: inline-flex;
   outline: none;
   border: none;

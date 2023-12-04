@@ -1,9 +1,22 @@
-import React, { useRef } from "react";
-import UserLIst from "./UserLIst";
+import React, { useRef, useState } from "react";
+import UserList from "./userLIst";
 import CreateUser from "./CreateUser";
 
 function App() {
-  const users = [
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+  });
+  const { username, email } = inputs;
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  const [users, setUsers] = useState([
     {
       id: 1,
       username: "velopert",
@@ -11,24 +24,40 @@ function App() {
     },
     {
       id: 2,
-      username: "김희찬",
-      email: "heedda.kollim@gmail.com",
+      username: "tester",
+      email: "tester@example.com",
     },
     {
       id: 3,
-      username: "조영준",
-      email: "장애",
+      username: "liz",
+      email: "liz@example.com",
     },
-  ];
+  ]);
 
   const nextId = useRef(4);
   const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      username,
+      email,
+    };
+    setUsers([...users, user]); //spread 방식 배열 추가
+    //setUsers(users.concat(user)); //concat을 사용하여 배열 추가
+    setInputs({
+      username: "",
+      email: "",
+    });
     nextId.current += 1;
   };
   return (
     <>
-      <CreateUser />
-      <UserLIst user={users} />
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
+      <UserList users={users} />
     </>
   );
 }

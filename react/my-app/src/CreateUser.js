@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateUser = ({ username, email, onChange, onCreate }) => {
+function CreateUser({ username, email, onChange, onCreate }) {
   return (
     <div>
       <input
@@ -10,7 +10,7 @@ const CreateUser = ({ username, email, onChange, onCreate }) => {
         value={username}
       />
       <input
-        jame="email"
+        name="email"
         placeholder="이메일"
         onChange={onChange}
         value={email}
@@ -18,6 +18,6 @@ const CreateUser = ({ username, email, onChange, onCreate }) => {
       <button onClick={onCreate}>등록</button>
     </div>
   );
-};
+}
 
 export default CreateUser;
