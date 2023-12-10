@@ -1,6 +1,6 @@
 import React, { useRef, useState, useMemo, useCallback } from "react";
-import UserList from "./UserList";
 import CreateUser from "./CreateUser";
+import UserList from "./UserList";
 
 function countActiveUsers(users) {
   console.log("활성 사용자 수를 세는중...");
@@ -25,7 +25,7 @@ function App() {
       id: 1,
       username: "velopert",
       email: "public.velopert@gmail.com",
-      active: true,
+      active: false,
     },
     {
       id: 2,
@@ -38,6 +38,12 @@ function App() {
       username: "liz",
       email: "liz@example.com",
       active: false,
+    },
+    {
+      id: 4,
+      username: "김희찬",
+      email: "heedda.kollim@gmail.com",
+      active: true,
     },
   ]);
 
